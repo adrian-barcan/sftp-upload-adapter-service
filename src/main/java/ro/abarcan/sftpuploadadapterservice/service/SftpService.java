@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ro.abarcan.sftpuploadadapterservice.config.AppConfig;
+import ro.abarcan.sftpuploadadapterservice.config.SftpConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +17,7 @@ import java.util.Properties;
 public class SftpService {
 
     public static final String PATH_DELIMITER = "/";
-    private final AppConfig appConfig;
+    private final SftpConfig sftpConfig;
 
     public void uploadFile(final MultipartFile file, final String path) {
 
@@ -30,8 +30,8 @@ public class SftpService {
             properties.put("StrictHostKeyChecking", "no");
 
             final var jsch = new JSch();
-            session = jsch.getSession(appConfig.getUser(), appConfig.getHost(), appConfig.getPort());
-            session.setPassword(appConfig.getPassword());
+            session = jsch.getSession(sftpConfig.getUser(), sftpConfig.getHost(), sftpConfig.getPort());
+            session.setPassword(sftpConfig.getPassword());
             session.setConfig(properties);
             session.connect();
 

@@ -7,12 +7,11 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "app.sftp")
-public class AppConfig {
+public class SftpConfig {
 
     private String host;
     private int port;
     private String user;
     private String password;
-    private String 	remoteDirectory;
 
 }
